@@ -27,6 +27,7 @@ botaoEnviar.addEventListener('click', (e) => {
   console.log(inputFirst.value)
   let li = document.createElement('li')
 
+
   let div1 = document.createElement('div')
   let alteracao = document.createElement('img')
   alteracao.setAttribute('src', './pen.png')
@@ -57,12 +58,31 @@ botaoEnviar.addEventListener('click', (e) => {
     li.remove()
     inputFirst.value = p.textContent
     inputFirst.style.borderBlockStartColor = 'red'
+    saveToDo()
     /*li.textContent = inputFirst.value*/
   })
   lixo.addEventListener('click', () => {
     li.remove()
-})
+    saveToDo()
+
+ })
   isChecked(input,li, alteracao)
+  saveToDo()
+
+  function saveToDo() {
+    const lis = aFazer.querySelectorAll('li')
+    console.log(lis)
+    const arrayLi = []
+
+    for (let i of lis) {
+      let textLi = i.textContent
+      arrayLi.push(textLi)
+    }
+
+    const tarefasJSON = JSON.stringify(arrayLi)
+    localStorage.setItem('i', tarefasJSON)
+  }
+  
 })
 
 
